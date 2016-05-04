@@ -163,7 +163,7 @@ impl AGENT_RESULT {
 // string, which is free(3)'d by Zabbix once done with the result.
 unsafe fn string_to_malloc_ptr(src: &str) -> *mut c_char {
     let c_src = ffi::CString::new(src).unwrap();
-    let len = c_src.to_bytes_with_nul().len() as u64;
+    let len = c_src.to_bytes_with_nul().len() as usize;
 
     let dst = malloc(len) as *mut c_char;
     strncpy(dst, c_src.as_ptr(), len);
